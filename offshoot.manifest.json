@@ -1,0 +1,34 @@
+{
+    "plugins": {
+        "SerpentPacmanGamePlugin": {
+            "name": "SerpentPacmanGamePlugin",
+            "version": "0.1.0",
+            "files": [
+                {
+                    "path": "serpent_Pacman_game.py",
+                    "pluggable": "Game"
+                }
+            ],
+            "plugins": [],
+            "libraries": [],
+            "config": {
+                "fps": 2
+            }
+        },
+        "SerpentNjamGamePlugin": {
+            "name": "SerpentNjamGamePlugin",
+            "version": "0.1.0",
+            "files": [
+                {
+                    "path": "serpent_Njam_game.py",
+                    "pluggable": "Game"
+                }
+            ],
+            "plugins": [],
+            "libraries": [],
+            "config": {
+                "fps": 2
+            }
+        }
+    }
+}

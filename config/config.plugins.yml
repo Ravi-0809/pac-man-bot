@@ -1,0 +1,4 @@
+SerpentNjamGamePlugin:
+  fps: 2
+SerpentPacmanGamePlugin:
+  fps: 2
