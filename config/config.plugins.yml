@@ -1,3 +1,7 @@
+SerpentNjamAgentGameAgentPlugin:
+  frame_handler: PLAY
+SerpentNjamGameAgentPlugin:
+  frame_handler: PLAY
 SerpentNjamGamePlugin:
   fps: 2
 SerpentPacmanGamePlugin:

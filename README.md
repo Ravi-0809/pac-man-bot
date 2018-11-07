@@ -65,7 +65,7 @@ Pacmanv.1.0(1995.07.18)©1995byRoarThronæs -->
 
 Next, Open *plugins/SerpentSuperHexagonGamePlugin/files/serpent_Njam_game.py* and change the following:
 ```
-kwargs["window_name"] = "Njam"
+kwargs["window_name"] = "Njam     http://njam.sourceforge.net"
 kwargs["executable_path"] = "/usr/games/njam -w"
 ```
 
@@ -73,3 +73,68 @@ as Njam is by default in fullsceen mode, alias it to 'njam -w' in ~/.bashrc
 Enter this in ~/.bashrc : `alias njam='njam -w`  
 
 * Run the game : `serpent launch Njam`
+
+### 5. Installing and setting up redis  
+Redis is essentially a db used to store image cache  
+* redis Installation :   
+```
+sudo apt-get update
+sudo apt-get install build-essential tcl   
+
+cd /tmp
+
+curl -O http://download.redis.io/redis-stable.tar.gz
+tar xzvf redis-stable.tar.gz
+
+cd redis-stable
+
+make
+make test
+sudo make install
+```
+* Configuring redis:
+```
+sudo mkdir /etc/redis
+sudo cp /tmp/redis-stable/redis.conf /etc/redis
+
+sudo nano /etc/redis/redis.conf
+```  
+In the file, find the **supervised directive**. Currently, this is set to no. Since we are running an operating system that uses the systemd init system, we can change this to `systemd`   
+Next, find the **dir** directory. Change the value to `/var/lib/redis`
+
+* Create a redis systemd unit file:
+
+`sudo nano /etc/systemd/system/redis.service`    
+Paste the following code into it:
+```
+[Unit]
+Description=Redis In-Memory Data Store
+After=network.target
+
+[Service]
+User=redis
+Group=redis
+ExecStart=/usr/local/bin/redis-server /etc/redis/redis.conf
+ExecStop=/usr/local/bin/redis-cli shutdown
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+* Create the redis user, group and directories:
+```
+sudo adduser --system --group --no-create-home redis
+
+sudo mkdir /var/lib/redis
+sudo chown redis:redis /var/lib/redis
+sudo chmod 770 /var/lib/redis
+```
+
+* Start and test Redis:
+```
+sudo systemctl start redis
+
+redis-cli
+```
+* Enable redis to start at boot:  
+`sudo systemctl enable redis`
