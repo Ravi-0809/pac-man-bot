@@ -1,18 +1,20 @@
 import offshoot
 
 
-class SerpentPacmanGamePlugin(offshoot.Plugin):
-    name = "SerpentPacmanGamePlugin"
+class SerpentNjamGameAgentPlugin(offshoot.Plugin):
+    name = "SerpentNjamGameAgentPlugin"
     version = "0.1.0"
+
+    plugins = []
 
     libraries = []
 
     files = [
-        {"path": "serpent_Pacman_game.py", "pluggable": "Game"}
+        {"path": "serpent_Njam_game_agent.py", "pluggable": "GameAgent"}
     ]
 
     config = {
-        "fps": 2
+        "frame_handler": "PLAY"
     }
 
     @classmethod
@@ -25,4 +27,4 @@ class SerpentPacmanGamePlugin(offshoot.Plugin):
 
 
 if __name__ == "__main__":
-    offshoot.executable_hook(SerpentPacmanGamePlugin)
+    offshoot.executable_hook(SerpentNjamGameAgentPlugin)

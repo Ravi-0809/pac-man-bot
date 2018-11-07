@@ -3,6 +3,7 @@ from serpent.game import Game
 from .api.api import NjamAPI
 
 from serpent.utilities import Singleton
+from subprocess import call
 
 
 
@@ -11,8 +12,11 @@ class SerpentNjamGame(Game, metaclass=Singleton):
 
     def __init__(self, **kwargs):
         kwargs["platform"] = "executable"
-
-        kwargs["window_name"] = "Njam"
+        # old_name = "Njam     http://njam.sourceforge.net"
+        # new_name = "Njam"
+        # call(["xdotool search --name "+old_name+" set_window --name "+new_name])
+        kwargs["window_name"] = "Njam     http://njam.sourceforge.net"
+        # kwargs["window_name"] = "Njam"
 
 
 
