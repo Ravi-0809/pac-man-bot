@@ -57,13 +57,13 @@ sudo apt-get install njam
 **Note:** We are using njam and not the normal pacman for ubuntu because of some issues with setting up in windowed mode with serpent.ai(Mentioned in the follwing sections)
 
 * Setting up :
-Run `serpent game generate`
+Run `serpent generate game`
 For the name of the game prompt enter - *Njam*  
 For the next prompt enter - *executable*
 <!-- Window name = 'Pacman v.1.0(1995.07.18)©1995 by Roar Thronæs'  
 Pacmanv.1.0(1995.07.18)©1995byRoarThronæs -->
 
-Next, Open *plugins/SerpentSuperHexagonGamePlugin/files/serpent_Njam_game.py* and change the following:
+Next, Open *plugins/SerpentNjamGamePlugin/files/serpent_Njam_game.py* and change the following:
 ```
 kwargs["window_name"] = "Njam     http://njam.sourceforge.net"
 kwargs["executable_path"] = "/usr/games/njam -w"
