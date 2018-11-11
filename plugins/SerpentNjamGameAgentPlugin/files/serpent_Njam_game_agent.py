@@ -13,13 +13,16 @@ class SerpentNjamGameAgent(GameAgent):
     def sprites_init(self):
         sprites_loc = '/home/ravi/workspace/AI/pac-man-bot/plugins/SerpentNjamGamePlugin/files/data/sprites/'
 
-        image_file = sprites_loc + 'sprite_pacman_0.png'
+        image_file = sprites_loc + 'sprite_pacman_left_1.png'
         image_data = skimage.io.imread(image_file)[...,np.newaxis]
         self.sprite_pacman = Sprite("Pacman", image_data=image_data)
 
-        # image_file = sprites_loc + 'sprite_pacman_2.png'
-        # image_data = skimage.io.imread(image_file)[...,np.newaxis]
-        # self.sprite_pacman.append_image_data(image_data)
+        icon_address = ['left_2','left_3','left_4', 'right_1', 'right_2' ,'right_3' ,'right_4', 'up_1','up_2', 'up_3', 'up_4', 'down_1', 'down_2', 'down_3', 'down_4']
+
+        for data in icon_address:
+            image_file = sprites_loc + 'sprite_pacman_' + data + '.png'
+            image_data = skimage.io.imread(image_file)[...,np.newaxis]
+            self.sprite_pacman.append_image_data(image_data)
 
         # for root, directories, files in os.walk('datasets/collect_frames/REGION_1'):
         #     for file in files:
@@ -57,7 +60,7 @@ class SerpentNjamGameAgent(GameAgent):
 
     def identify_sprite(self, sprite, game_frame):
         # sprite_identifier = SpriteIdentifier()
-        sprite_identify = self.sprite_identifier.identify(sprite = sprite, mode="SIGNATURE_COLORS",debug=True)
+        sprite_identify = self.sprite_identifier.identify(sprite = sprite, mode="SIGNATURE_COLORS")
 
         sprite_locator = SpriteLocator()
         location = sprite_locator.locate(sprite=sprite, game_frame=game_frame)
@@ -97,6 +100,7 @@ class SerpentNjamGameAgent(GameAgent):
             self.input_controller.tap_key(KeyboardKey.KEY_RETURN)
             self.c = 0
 
-        output = self.identify_sprite(self.sprite_red1, game_frame)
+        output = self.identify_sprite(self.sprite_pacman, game_frame)
+        print('yo bitch')
         print('name = ', output["sprite_name"])
         print('location = ',output["location"])
