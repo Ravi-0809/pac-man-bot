@@ -13,11 +13,11 @@ class SerpentNjamGameAgent(GameAgent):
     def sprites_init(self):
         sprites_loc = '/home/ravi/workspace/AI/pac-man-bot/plugins/SerpentNjamGamePlugin/files/data/sprites/'
 
-        image_file = sprites_loc + 'pacman/sprite_pacman_0_0.png'
+        image_file = sprites_loc + 'sprite_pacman_0.png'
         image_data = skimage.io.imread(image_file)[...,np.newaxis]
         self.sprite_pacman = Sprite("Pacman", image_data=image_data)
 
-        # image_file = sprites_loc + 'sprite_pacman_1_1.png'
+        # image_file = sprites_loc + 'sprite_pacman_2.png'
         # image_data = skimage.io.imread(image_file)[...,np.newaxis]
         # self.sprite_pacman.append_image_data(image_data)
 
@@ -30,7 +30,7 @@ class SerpentNjamGameAgent(GameAgent):
                 # self.sprite_pacman.append_image_data(extra_image[..., np.newaxis])
 
 
-        image_file = sprites_loc + 'blue/sprite_blue_0.png'
+        image_file = sprites_loc + 'sprite_blue_0.png'
         image_data = skimage.io.imread(image_file)[..., np.newaxis]
         self.sprite_blue1 = Sprite("Blue1", image_data=image_data)
         #
@@ -38,7 +38,7 @@ class SerpentNjamGameAgent(GameAgent):
         # image_data = skimage.io.imread(image_file)[..., np.newaxis]
         # self.sprite_blue2 = Sprite("Blue2", image_data=image_data)
         #
-        image_file = sprites_loc + 'red/sprite_red_0.png'
+        image_file = sprites_loc + 'sprite_red_0.png'
         image_data = skimage.io.imread(image_file)[..., np.newaxis]
         self.sprite_red1 = Sprite("Red1", image_data=image_data)
         #
@@ -46,7 +46,7 @@ class SerpentNjamGameAgent(GameAgent):
         # image_data = skimage.io.imread(image_file)[..., np.newaxis]
         # self.sprite_red2 = Sprite("Red2", image_data=image_data)
         #
-        image_file = sprites_loc + 'orange/sprite_orange_0.png'
+        image_file = sprites_loc + 'sprite_orange_0.png'
         image_data = skimage.io.imread(image_file)[..., np.newaxis]
         self.sprite_orange1 = Sprite("Orange1", image_data=image_data)
         #
@@ -97,6 +97,6 @@ class SerpentNjamGameAgent(GameAgent):
             self.input_controller.tap_key(KeyboardKey.KEY_RETURN)
             self.c = 0
 
-        output = self.identify_sprite(self.sprite_pacman, game_frame)
+        output = self.identify_sprite(self.sprite_red1, game_frame)
         print('name = ', output["sprite_name"])
         print('location = ',output["location"])

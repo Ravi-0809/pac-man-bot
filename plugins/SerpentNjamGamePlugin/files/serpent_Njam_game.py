@@ -32,6 +32,8 @@ class SerpentNjamGame(Game, metaclass=Singleton):
         regions = {
             "SAMPLE_REGION": (0, 0, 0, 0),
             "REGION_1": (25, 25, 50, 50),
+            "REGION_2": (300, 25, 325, 50),
+            "REGION_3": (550, 75, 575, 100),
         }
 
         return regions
