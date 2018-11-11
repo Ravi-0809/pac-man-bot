@@ -33,7 +33,7 @@ class SerpentNjamGame(Game, metaclass=Singleton):
     def screen_regions(self):
         regions = {
             "SAMPLE_REGION": (0, 0, 0, 0),
-            # "REGION": (552, 276, 573, 298)
+            "REGION_1": (25, 25, 50, 50),
         }
 
         return regions
