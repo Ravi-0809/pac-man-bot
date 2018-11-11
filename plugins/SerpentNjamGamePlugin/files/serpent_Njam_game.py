@@ -17,12 +17,10 @@ class SerpentNjamGame(Game, metaclass=Singleton):
         # call(["xdotool search --name "+old_name+" set_window --name "+new_name])
         kwargs["window_name"] = "Njam     http://njam.sourceforge.net"
         # kwargs["window_name"] = "Njam"
-
-
+        self.platform = "executable"
+        self.window_name = "Njam     http://njam.sourceforge.net"
 
         kwargs["executable_path"] = "/usr/games/njam -w"
-
-
 
         super().__init__(**kwargs)
 
