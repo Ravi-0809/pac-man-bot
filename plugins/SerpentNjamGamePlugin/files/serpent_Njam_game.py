@@ -17,12 +17,10 @@ class SerpentNjamGame(Game, metaclass=Singleton):
         # call(["xdotool search --name "+old_name+" set_window --name "+new_name])
         kwargs["window_name"] = "Njam     http://njam.sourceforge.net"
         # kwargs["window_name"] = "Njam"
-
-
+        self.platform = "executable"
+        self.window_name = "Njam     http://njam.sourceforge.net"
 
         kwargs["executable_path"] = "/usr/games/njam -w"
-
-
 
         super().__init__(**kwargs)
 
@@ -32,7 +30,10 @@ class SerpentNjamGame(Game, metaclass=Singleton):
     @property
     def screen_regions(self):
         regions = {
-            "SAMPLE_REGION": (0, 0, 0, 0)
+            "SAMPLE_REGION": (0, 0, 0, 0),
+            "REGION_1": (25, 25, 50, 50),
+            "REGION_2": (300, 25, 325, 50),
+            "REGION_3": (550, 75, 575, 100),
         }
 
         return regions
