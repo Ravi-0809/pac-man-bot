@@ -15,13 +15,20 @@ import pickle
 class SerpentNjamGameAgent(GameAgent):
 
     def write_path(self):
-        with open('path.pkl', 'wb') as f:
+        with open('plugins/SerpentNjamGameAgentPlugin/files/path.pkl', 'wb') as f:
             pickle.dump(self.path_list, f)
 
     def read_path(self):
-        with open('path.pkl', 'rb') as f:
-            self.path_list = pickle.load(f)
-            return self.path_list
+        l = []
+        try:
+            with open('plugins/SerpentNjamGameAgentPlugin/files/path.pkl', 'rb') as f:
+                l = pickle.load(f)
+            self.path_list = l
+            print('self.path_list = ', self.path_list)
+            return l
+        except Exception as e:
+            print(e)
+            return l
 
     def identify_death(self,game_frame):
         output = self.identify_sprite(self.sprite_death, game_frame)
@@ -32,20 +39,25 @@ class SerpentNjamGameAgent(GameAgent):
         if(random_flag == 1):
             directions = ['left', 'right', 'up', 'down']
             random_number = randint(0,3)
-            self.path_list = self.path_list.append(directions[random_number])
-            return press(directions[random_number])
+            print("--------")
+            print(type(self.path_list))
+            print(directions[random_number])
+            self.path_list.append(directions[random_number])
+            print(self.path_list)
+            press(directions[random_number])
         else:
             directions = self.path_list
             for d in directions:
                 press(d)
-                self.path_list = self.path_list.append(d)
+                self.path_list.append(d)
+                print(d)
 
     def sprites_init(self):
         try:
-            sprites_loc = '/home/ravi/workspace/AI/pac-man-bot/plugins/SerpentNjamGamePlugin/files/data/sprites/'
+            sprites_loc = 'plugins/SerpentNjamGamePlugin/files/data/sprites/'
         except:
             try:
-                sprites_loc = '/home/ashwin/workspace/pac-man-bot/plugins/SerpentNjamGamePlugin/files/data/sprites/'
+                sprites_loc = 'plugins/SerpentNjamGamePlugin/files/data/sprites/'
             except:
                 # Achanta put your addr here.
                 pass
@@ -94,6 +106,7 @@ class SerpentNjamGameAgent(GameAgent):
 
     def __init__(self, **kwargs):
         self.c = 1
+        self.path_list = []
         print("Inside init")
         super().__init__(**kwargs)
 
@@ -102,15 +115,22 @@ class SerpentNjamGameAgent(GameAgent):
 
         # Initializing Sprites :
         self.sprites_init()
+        # Checking if path already exists :
+        l = self.read_path()
+        print('l = ', l)
+        print(type(l))
+        if(len(l) == 0):
+            self.flag = 1 # Path doesnt already exist
+        else:
+            self.flag = 0 # Path exists
+
+        print('flag = ', self.flag)
+
+        # Entering the playing mode :
         self.enter_game()
-        self.path_list = []
+        # self.path_list = []
 
     def setup_play(self):
-        pass
-
-    def handle_play(self, game_frame):
-        print("GameAgent running")
-
         # Dynamically setting refresh rate:
         for i, game_frame in enumerate(self.game_frame_buffer.frames):
             self.visual_debugger.store_image_data(
@@ -119,11 +139,10 @@ class SerpentNjamGameAgent(GameAgent):
                 str(i)
             )
 
-        l = self.read_path()
-        if(len(l) == 0):
-            self.traverse_path(random_flag = 1)
-        else:
-            self.traverse_path(random_flag = 0)
+    def handle_play(self, game_frame):
+        print("GameAgent running")
+
+        self.traverse_path(random_flag = self.flag)
 
         if(self.identify_death(game_frame) != None):
             print('Game Over')
